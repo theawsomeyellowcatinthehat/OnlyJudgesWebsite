@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+<script>import React, { useState, useEffect } from "react";
 import { Case, Employee, PayrollRecord, Schedule } from "@/entities/all";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -84,6 +84,7 @@ export default function Dashboard() {
           <div className="space-y-6">
             <UpcomingEvents schedule={schedule} isLoading={isLoading} />
             <PayrollSummary payroll={payroll} isLoading={isLoading} />
+            </script>
           </div>
         </div>
       </div>
