@@ -1,0 +1,76 @@
+{
+  "name": "Precedent",
+  "type": "object",
+  "properties": {
+    "case_name": {
+      "type": "string",
+      "description": "Name of the precedent case"
+    },
+    "citation": {
+      "type": "string",
+      "description": "Legal citation"
+    },
+    "court": {
+      "type": "string",
+      "description": "Court that decided the case"
+    },
+    "year": {
+      "type": "number",
+      "description": "Year of decision"
+    },
+    "legal_principle": {
+      "type": "string",
+      "description": "Key legal principle established"
+    },
+    "case_summary": {
+      "type": "string",
+      "description": "Summary of the case"
+    },
+    "practice_area": {
+      "type": "string",
+      "enum": [
+        "civil",
+        "criminal",
+        "corporate",
+        "family",
+        "immigration",
+        "intellectual_property",
+        "labor",
+        "tax",
+        "constitutional",
+        "other"
+      ],
+      "description": "Area of law"
+    },
+    "keywords": {
+      "type": "string",
+      "description": "Relevant keywords for searching"
+    },
+    "relevance": {
+      "type": "string",
+      "enum": [
+        "highly_relevant",
+        "relevant",
+        "somewhat_relevant"
+      ],
+      "default": "relevant",
+      "description": "Relevance level for current practice"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or commentary"
+    },
+    "document_url": {
+      "type": "string",
+      "description": "Link to full case document if available"
+    }
+  },
+  "required": [
+    "case_name",
+    "citation",
+    "court",
+    "year",
+    "legal_principle",
+    "practice_area"
+  ]
+}

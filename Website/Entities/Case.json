@@ -1,0 +1,96 @@
+{
+  "name": "Case",
+  "type": "object",
+  "properties": {
+    "case_number": {
+      "type": "string",
+      "description": "Unique case identifier"
+    },
+    "case_name": {
+      "type": "string",
+      "description": "Name/title of the case"
+    },
+    "court_level": {
+      "type": "string",
+      "enum": [
+        "district",
+        "federal",
+        "supreme"
+      ],
+      "description": "Court level where case is filed"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "pending",
+        "closed",
+        "on_appeal"
+      ],
+      "default": "active",
+      "description": "Current status of the case"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Name of the client"
+    },
+    "opposing_party": {
+      "type": "string",
+      "description": "Name of opposing party"
+    },
+    "assigned_attorney": {
+      "type": "string",
+      "description": "Lead attorney assigned to case"
+    },
+    "case_type": {
+      "type": "string",
+      "enum": [
+        "civil",
+        "criminal",
+        "corporate",
+        "family",
+        "immigration",
+        "intellectual_property",
+        "labor",
+        "tax",
+        "other"
+      ],
+      "description": "Type/category of case"
+    },
+    "filing_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date case was filed"
+    },
+    "court_location": {
+      "type": "string",
+      "description": "Court location/jurisdiction"
+    },
+    "case_value": {
+      "type": "number",
+      "description": "Monetary value of case if applicable"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the case"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "urgent"
+      ],
+      "default": "medium",
+      "description": "Case priority level"
+    }
+  },
+  "required": [
+    "case_number",
+    "case_name",
+    "court_level",
+    "client_name",
+    "assigned_attorney"
+  ]
+}

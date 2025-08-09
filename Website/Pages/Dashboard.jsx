@@ -1,0 +1,92 @@
+import React, { useState, useEffect } from "react";
+import { Case, Employee, PayrollRecord, Schedule } from "@/entities/all";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { FileText, Users, DollarSign, Calendar, TrendingUp, AlertTriangle } from "lucide-react";
+import { format } from "date-fns";
+
+import StatsOverview from "../components/dashboard/StatsOverview";
+import RecentCases from "../components/dashboard/RecentCases";
+import UpcomingEvents from "../components/dashboard/UpcomingEvents";
+import PayrollSummary from "../components/dashboard/PayrollSummary";
+
+export default function Dashboard() {
+  const [cases, setCases] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [payroll, setPayroll] = useState([]);
+  const [schedule, setSchedule] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    loadDashboardData();
+  }, []);
+
+  const loadDashboardData = async () => {
+    setIsLoading(true);
+    try {
+      const [casesData, employeesData, payrollData, scheduleData] = await Promise.all([
+        Case.list("-created_date", 10),
+        Employee.list("-hire_date", 20),
+        PayrollRecord.list("-pay_date", 10),
+        Schedule.list("-date", 10)
+      ]);
+      
+      setCases(casesData);
+      setEmployees(employeesData);
+      setPayroll(payrollData);
+      setSchedule(scheduleData);
+    } catch (error) {
+      console.error("Error loading dashboard data:", error);
+    }
+    setIsLoading(false);
+  };
+
+  const getStats = () => {
+    const activeCases = cases.filter(c => c.status === 'active').length;
+    const urgentCases = cases.filter(c => c.priority === 'urgent').length;
+    const totalCaseValue = cases.reduce((sum, c) => sum + (c.case_value || 0), 0);
+    const upcomingEvents = schedule.filter(s => 
+      new Date(s.date) >= new Date() && 
+      new Date(s.date) <= new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    ).length;
+
+    return {
+      activeCases,
+      urgentCases,
+      totalCaseValue,
+      upcomingEvents,
+      totalEmployees: employees.length
+    };
+  };
+
+  const stats = getStats();
+
+  return (
+    <div className="p-6 md:p-8 space-y-8 bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-slate-900 mb-2">Firm Dashboard</h1>
+          <p className="text-slate-600 text-lg">Overview of your legal practice</p>
+        </div>
+
+        {/* Stats Overview */}
+        <StatsOverview stats={stats} isLoading={isLoading} />
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Left Column - Recent Cases */}
+          <div className="lg:col-span-2">
+            <RecentCases cases={cases} isLoading={isLoading} />
+          </div>
+
+          {/* Right Column - Upcoming Events & Payroll */}
+          <div className="space-y-6">
+            <UpcomingEvents schedule={schedule} isLoading={isLoading} />
+            <PayrollSummary payroll={payroll} isLoading={isLoading} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

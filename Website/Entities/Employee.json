@@ -1,0 +1,89 @@
+{
+  "name": "Employee",
+  "type": "object",
+  "properties": {
+    "employee_id": {
+      "type": "string",
+      "description": "Unique employee identifier"
+    },
+    "full_name": {
+      "type": "string",
+      "description": "Employee full name"
+    },
+    "position": {
+      "type": "string",
+      "enum": [
+        "partner",
+        "senior_attorney",
+        "associate",
+        "paralegal",
+        "legal_assistant",
+        "receptionist",
+        "accountant",
+        "hr_manager",
+        "it_support",
+        "other"
+      ],
+      "description": "Job position/role"
+    },
+    "department": {
+      "type": "string",
+      "enum": [
+        "litigation",
+        "corporate",
+        "family_law",
+        "criminal",
+        "immigration",
+        "intellectual_property",
+        "administration",
+        "finance",
+        "hr",
+        "it"
+      ],
+      "description": "Department/practice area"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Work email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
+    },
+    "hire_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of hire"
+    },
+    "salary": {
+      "type": "number",
+      "description": "Annual salary"
+    },
+    "bar_admission": {
+      "type": "string",
+      "description": "Bar admission details (if applicable)"
+    },
+    "office_location": {
+      "type": "string",
+      "description": "Office location/floor"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "on_leave",
+        "terminated"
+      ],
+      "default": "active",
+      "description": "Employment status"
+    }
+  },
+  "required": [
+    "employee_id",
+    "full_name",
+    "position",
+    "email",
+    "hire_date"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "name": "CaseDeadline",
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "description": "Reference to the case"
+    },
+    "case_number": {
+      "type": "string",
+      "description": "Case number for reference"
+    },
+    "case_name": {
+      "type": "string",
+      "description": "Case name for reference"
+    },
+    "deadline_type": {
+      "type": "string",
+      "enum": [
+        "filing",
+        "discovery",
+        "motion",
+        "trial",
+        "appeal",
+        "response",
+        "deposition",
+        "mediation",
+        "settlement",
+        "other"
+      ],
+      "description": "Type of deadline"
+    },
+    "title": {
+      "type": "string",
+      "description": "Deadline title/description"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the deadline is due"
+    },
+    "due_time": {
+      "type": "string",
+      "description": "Time deadline is due (HH:MM format)"
+    },
+    "assigned_attorney": {
+      "type": "string",
+      "description": "Attorney responsible for the deadline"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "urgent"
+      ],
+      "default": "medium",
+      "description": "Deadline priority"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "completed",
+        "missed"
+      ],
+      "default": "pending",
+      "description": "Deadline status"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the deadline"
+    },
+    "reminder_days": {
+      "type": "number",
+      "default": 7,
+      "description": "Days before deadline to show reminders"
+    },
+    "schedule_id": {
+      "type": "string",
+      "description": "Reference to automatically created schedule entry"
+    }
+  },
+  "required": [
+    "case_id",
+    "case_number",
+    "title",
+    "due_date",
+    "assigned_attorney"
+  ]
+}

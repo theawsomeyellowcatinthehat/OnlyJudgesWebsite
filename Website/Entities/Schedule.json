@@ -1,0 +1,86 @@
+{
+  "name": "Schedule",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Event title"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "court_hearing",
+        "client_meeting",
+        "deposition",
+        "mediation",
+        "deadline",
+        "internal_meeting",
+        "other"
+      ],
+      "description": "Type of scheduled event"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Event date"
+    },
+    "start_time": {
+      "type": "string",
+      "description": "Start time (HH:MM format)"
+    },
+    "end_time": {
+      "type": "string",
+      "description": "End time (HH:MM format)"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location of event"
+    },
+    "case_number": {
+      "type": "string",
+      "description": "Associated case number if applicable"
+    },
+    "assigned_attorney": {
+      "type": "string",
+      "description": "Attorney responsible for event"
+    },
+    "participants": {
+      "type": "string",
+      "description": "List of participants"
+    },
+    "description": {
+      "type": "string",
+      "description": "Event description/notes"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "urgent"
+      ],
+      "default": "medium",
+      "description": "Event priority"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "confirmed",
+        "completed",
+        "cancelled",
+        "rescheduled"
+      ],
+      "default": "scheduled",
+      "description": "Event status"
+    }
+  },
+  "required": [
+    "title",
+    "event_type",
+    "date",
+    "start_time",
+    "assigned_attorney"
+  ]
+}
